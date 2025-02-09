@@ -5,6 +5,7 @@ import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import { errorHandler } from "./middlewares/errorHandler";
 import { ErrorRequestHandler } from "express";
+import userRoutes from "./routes/userRoutes";
 
 // Load environment variables
 dotenv.config();
@@ -27,6 +28,9 @@ app.use(limiter);
 app.get("/", (req, res) => {
   res.json({ message: "Todo List API" });
 });
+
+// User routes
+app.use("/api/users", userRoutes);
 
 // Error handling middleware
 app.use(errorHandler as ErrorRequestHandler);
