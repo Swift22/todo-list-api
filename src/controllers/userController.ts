@@ -18,6 +18,7 @@ export const register = async (
 
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
+      console.log(`User with email ${email} already exists`);
       throw new ValidationError("Email already in use");
     }
 
