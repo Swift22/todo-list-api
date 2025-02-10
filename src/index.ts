@@ -6,6 +6,7 @@ import { rateLimit } from "express-rate-limit";
 import { errorHandler } from "./middlewares/errorHandler";
 import { ErrorRequestHandler } from "express";
 import userRoutes from "./routes/userRoutes";
+import todoRoutes from "./routes/todoRoutes";
 
 // Load environment variables
 dotenv.config();
@@ -31,6 +32,9 @@ app.get("/", (req, res) => {
 
 // User routes
 app.use("/api/users", userRoutes);
+
+// Todo routes
+app.use("/api/todos", todoRoutes);
 
 // Error handling middleware
 app.use(errorHandler as ErrorRequestHandler);
