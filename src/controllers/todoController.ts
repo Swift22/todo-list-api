@@ -23,6 +23,8 @@ export const create = async (
       throw new ValidationError("Title is required");
     }
 
+    console.log("User ID from token:", req.user!.userId);
+
     const todo = await createTodo({
       title,
       description,
@@ -30,8 +32,11 @@ export const create = async (
       userId: req.user!.userId,
     });
 
+    console.log("Todo created:", todo);
+
     res.status(201).json(todo);
   } catch (error) {
+    console.error("Error creating todo:", error);
     next(error);
   }
 };

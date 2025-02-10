@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 export const createTodo = async (
   todoData: Omit<Todo, "id" | "createdAt" | "updatedAt">
 ): Promise<Todo> => {
+  console.log("Creating todo with data:", todoData);
   return prisma.todo.create({
     data: todoData,
   });
@@ -36,8 +37,16 @@ export const updateTodo = async (
   userId: number,
   todoData: Partial<Todo>
 ): Promise<Todo | null> => {
-  return prisma.todo.update({
+  const todo = await prisma.todo.findFirst({
     where: { id, userId },
+  });
+
+  if (!todo) {
+    return null; // Return null if the todo doesn't exist
+  }
+
+  return prisma.todo.update({
+    where: { id },
     data: todoData,
   });
 };
