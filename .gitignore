@@ -1,4 +1,7 @@
-node_modules/
-dist/
+# Root level gitignore
+.DS_Store
 .env
-coverage/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
